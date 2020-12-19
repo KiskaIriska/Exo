@@ -5,24 +5,24 @@ using System.Text;
 
 namespace Database.Models
 {
-    public class Dop
+    public class Author
     {
         public int Id { get; set; }
 
-        public int OsnvId { get; set; }
+        public int ArticleId { get; set; }
 
         [Required]
-        public string DopName { get; set; }
+        public string AuthorName { get; set; }
 
         [Required]
-        public int Count { get; set; }
+        public string Email { get; set; }
 
         [Required]
-        public DateTime DataCreateDop { get; set; }
+        public DateTime Birthday { get; set; }
 
         [Required]
         public string Place { get; set; }
 
-        public virtual Osnv Osnv { get; set; }
+        public virtual Article Article { get; set; }
     }
 }

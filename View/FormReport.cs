@@ -33,7 +33,7 @@ namespace View
                 {
                     try
                     {
-                        logic.SaveDopsToPdfFile(new ReportBindingModel
+                        logic.SaveAuthorsToPdfFile(new ReportBindingModel
                         {
                             FileName = dialog.FileName,
                             DateFrom = dateTimePickerFrom.Value.Date,

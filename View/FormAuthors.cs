@@ -1,5 +1,4 @@
 ﻿using Logic.BindingModel;
-using Logic.BuisnessLogic;
 using Logic.Interface;
 using System;
 using System.Collections.Generic;
@@ -14,20 +13,20 @@ using Unity;
 
 namespace View
 {
-    public partial class FormOsnvs : Form
+    public partial class FormAuthors : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
-        private readonly IOsnv Osnv;
+        private readonly IAuthor Author;
 
-        public FormOsnvs(IOsnv Osnv)
+        public FormAuthors(IAuthor Author)
         {
             InitializeComponent();
-            this.Osnv = Osnv;
+            this.Author = Author;
         }
 
-        private void FormOsnvs_Load(object sender, EventArgs e)
+        private void FormAuthors_Load(object sender, EventArgs e)
         {
             LoadData();
         }
@@ -36,11 +35,12 @@ namespace View
         {
             try
             {
-                var list = Osnv.Read(null);
+                var list = Author.Read(null);
                 if (list != null)
                 {
-                    dataGridView.DataSource = list;
-                    dataGridView.Columns[0].Visible = false;
+                    dataGridView1.DataSource = list;
+                    dataGridView1.Columns[0].Visible = false;
+                    dataGridView1.Columns[1].Visible = false;
                 }
             }
             catch (Exception ex)
@@ -51,7 +51,7 @@ namespace View
 
         private void buttonAdd_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormOsnv>();
+            var form = Container.Resolve<FormAuthor>();
             if (form.ShowDialog() == DialogResult.OK)
             {
                 LoadData();
@@ -60,27 +60,22 @@ namespace View
 
         private void buttonCh_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
-                var form = Container.Resolve<FormOsnv>();
-                form.Id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                var form = Container.Resolve<FormAuthor>();
+                form.Id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
                 if (form.ShowDialog() == DialogResult.OK)
                 {
                     LoadData();
-                }
-            }
+                }        
         }
 
         private void buttonDel_Click(object sender, EventArgs e)
         {
-            if (dataGridView.SelectedRows.Count == 1)
-            {
                 if (MessageBox.Show("Удалить запись", "Вопрос", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    int id = Convert.ToInt32(dataGridView.SelectedRows[0].Cells[0].Value);
+                    int id = Convert.ToInt32(dataGridView1.SelectedRows[0].Cells[0].Value);
                     try
                     {
-                        Osnv.Delete(new OsnvBindingModel { Id = id });
+                        Author.Delete(new AuthorBindingModel { Id = id });
                     }
                     catch (Exception ex)
                     {
@@ -88,7 +83,6 @@ namespace View
                     }
                     LoadData();
                 }
-            }
         }
 
         private void buttonUpd_Click(object sender, EventArgs e)
@@ -96,17 +90,10 @@ namespace View
             LoadData();
         }
 
-        private void продуктыToolStripMenuItem_Click(object sender, EventArgs e)
+        private void авторыToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var form = Container.Resolve<FormDops>();
+            var form = Container.Resolve<FormAuthors>();
             form.ShowDialog();
         }
-
-        private void отчетыToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var form = Container.Resolve<FormReport>();
-            form.ShowDialog();
-        }
-
     }
 }

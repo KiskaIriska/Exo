@@ -7,32 +7,32 @@ using System.Text;
 namespace Logic.ViewModel
 {
     [DataContract]
-    public class DopViewModel
+    public class AuthorViewModel
     {
         [DataMember]
         public int Id { get; set; }
 
         [DataMember]
-        public int OsnvId { get; set; }
+        public int ArticleId { get; set; }
 
         [DataMember]
-        [DisplayName("Название")]
-        public string DopName { get; set; }
+        [DisplayName("ФИО")]
+        public string AuthorName { get; set; }
 
         [DataMember]
-        [DisplayName("Колличество")]
-        public int Count { get; set; }
+        [DisplayName("Email")]
+        public string Email { get; set; }
 
         [DataMember]
-        [DisplayName("Дата поставки")]
-        public DateTime DataCreateDop { get; set; }
+        [DisplayName("День рождения")]
+        public DateTime Birthday { get; set; }
 
         [DataMember]
-        [DisplayName("Место производства")]
+        [DisplayName("Место работы")]
         public string Place { get; set; }
 
         [DataMember]
-        [DisplayName("Название блюда")]
+        [DisplayName("Название статьи")]
         public string Name { get; set; }
 
         public DateTime DateCreate { get; set; }

@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class FormOsnv
+    partial class FormArticle
     {
         /// <summary>
         /// Required designer variable.
@@ -62,9 +62,9 @@
             this.label2.Location = new System.Drawing.Point(61, 105);
             this.label2.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(61, 13);
+            this.label2.Size = new System.Drawing.Size(57, 13);
             this.label2.TabIndex = 6;
-            this.label2.Text = "Вид блюда";
+            this.label2.Text = "Тематика";
             // 
             // textBoxSubject
             // 
@@ -77,12 +77,12 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(6, 167);
+            this.label3.Location = new System.Drawing.Point(34, 167);
             this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(112, 13);
+            this.label3.Size = new System.Drawing.Size(84, 13);
             this.label3.TabIndex = 8;
-            this.label3.Text = "Дата приготовления";
+            this.label3.Text = "Дата создания";
             // 
             // dateTimePicker1
             // 
@@ -114,7 +114,7 @@
             this.buttonCancel.UseVisualStyleBackColor = true;
             this.buttonCancel.Click += new System.EventHandler(this.buttonCancel_Click);
             // 
-            // FormOsnv
+            // FormArticle
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -127,8 +127,8 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.textBoxTitle);
             this.Controls.Add(this.label1);
-            this.Name = "FormOsnv";
-            this.Text = "FormOsnv";
+            this.Name = "FormArticle";
+            this.Text = "FormArticle";
             this.ResumeLayout(false);
             this.PerformLayout();
 

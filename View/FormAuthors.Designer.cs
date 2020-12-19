@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class FormDops
+    partial class FormAuthors
     {
         /// <summary>
         /// Required designer variable.
@@ -92,7 +92,7 @@
             this.buttonUpd.UseVisualStyleBackColor = true;
             this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click);
             // 
-            // FormDops
+            // FormAuthors
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -102,8 +102,8 @@
             this.Controls.Add(this.buttonCh);
             this.Controls.Add(this.buttonAdd);
             this.Controls.Add(this.dataGridView1);
-            this.Name = "FormDops";
-            this.Text = "FormDops";
+            this.Name = "FormAuthors";
+            this.Text = "FormAuthors";
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             this.ResumeLayout(false);
 

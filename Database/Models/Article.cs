@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Database.Models
 {
-    public class Osnv
+    public class Article
     {
         public int Id { get; set; }
 
@@ -18,6 +18,6 @@ namespace Database.Models
         [Required]
         public DateTime DateCreate { get; set; }
 
-        public virtual List<Dop> Dops { get; set; }
+        public virtual List<Author> Authors { get; set; }
     }
 }

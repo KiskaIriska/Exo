@@ -1,6 +1,6 @@
 ﻿namespace View
 {
-    partial class FormOsnvs
+    partial class FormArticles
     {
         /// <summary>
         /// Required designer variable.
@@ -56,7 +56,7 @@
             this.изделиеToolStripMenuItem.Name = "изделиеToolStripMenuItem";
             this.изделиеToolStripMenuItem.Size = new System.Drawing.Size(63, 20);
             this.изделиеToolStripMenuItem.Text = "изделие";
-            this.изделиеToolStripMenuItem.Click += new System.EventHandler(this.продуктыToolStripMenuItem_Click);
+            this.изделиеToolStripMenuItem.Click += new System.EventHandler(this.авторыToolStripMenuItem_Click);
             // 
             // отчетыToolStripMenuItem
             // 
@@ -121,7 +121,7 @@
             this.buttonUpd.UseVisualStyleBackColor = true;
             this.buttonUpd.Click += new System.EventHandler(this.buttonUpd_Click);
             // 
-            // FormOsnvs
+            // FormArticles
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -133,8 +133,8 @@
             this.Controls.Add(this.dataGridView);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
-            this.Name = "FormOsnvs";
-            this.Text = "FormOsnvs";
+            this.Name = "FormArticles";
+            this.Text = "FormArticles";
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView)).EndInit();

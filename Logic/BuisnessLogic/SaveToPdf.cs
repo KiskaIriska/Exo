@@ -31,11 +31,11 @@ namespace Logic.BuisnessLogic
             {
                 Table = table,
                 //названия
-                Texts = new List<string> { "Блюдо", "Дата приготовления", "Продукт", "Дата завоза", "Место производства" },
+                Texts = new List<string> { "Название статьи", "Дата создания", "ФИО", "День рождения", "Место работы" },
                 Style = "NormalTitle",
                 ParagraphAlignment = ParagraphAlignment.Center
             });
-            foreach (var cl in info.Dops)
+            foreach (var cl in info.Authors)
             {
                 CreateRow(new PdfRowParameters
                 {
@@ -44,8 +44,8 @@ namespace Logic.BuisnessLogic
                     {
                         cl.Name,
                         cl.DateCreate.ToString(),
-                        cl.DopName,
-                        cl.DataCreateDop.ToString(),
+                        cl.AuthorName,
+                        cl.Birthday.ToString(),
                         cl.Place
                     },
                     Style = "Normal",
@@ -70,7 +70,7 @@ namespace Logic.BuisnessLogic
         private static void CreateRow(PdfRowParameters rowParameters)
         {
             Row row = rowParameters.Table.AddRow();
-            for (int i = 0; i < rowParameters.Texts.Count; ++i)
+            for (int i = 0; i < 100; ++i)
             {
                 FillCell(new PdfCellParameters
                 {

@@ -6,17 +6,17 @@ using System.Text;
 namespace Logic.BindingModel
 {
     [DataContract]
-    public class DopBindingModel
+    public class AuthorBindingModel
     {
         public int? Id { get; set; }
 
-        public int OsnvId { get; set; }
+        public int ArticleId { get; set; }
 
-        public string DopName { get; set; }
+        public string AuthorName { get; set; }
 
-        public int Count { get; set; }
+        public string Email { get; set; }
 
-        public DateTime DataCreateDop { get; set; }
+        public DateTime Birthday { get; set; }
 
         public string Place { get; set; }
 

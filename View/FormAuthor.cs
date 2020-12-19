@@ -14,35 +14,49 @@ using Unity;
 
 namespace View
 {
-    public partial class FormOsnv : Form
+    public partial class FormAuthor : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
         public int Id { set { id = value; } }
 
-        private readonly IOsnv Osnv;
+        private readonly IAuthor Author;
+
+        private readonly IArticle Article;
 
         private int? id;
 
-        public FormOsnv(IOsnv Osnv)
+        public FormAuthor(IAuthor service, IArticle ArticleService)
         {
             InitializeComponent();
-            this.Osnv = Osnv;
+            this.Author = service;
+            this.Article = ArticleService;
         }
 
-        private void FormOsnv_Load(object sender, EventArgs e)
+        private void FormAuthor_Load(object sender, EventArgs e)
         {
+            var list = Article.Read(null);
+            if (list != null)
+            {
+                comboBox1.DataSource = list;
+                comboBox1.DisplayMember = "Name";
+                comboBox1.ValueMember = "Id";
+
+            }
             if (id.HasValue)
             {
                 try
                 {
-                    var view = Osnv.Read(new OsnvBindingModel { Id = id })?[0];
+
+                    var view = Author.Read(new AuthorBindingModel { Id = id })?[0];
                     if (view != null)
                     {
-                        textBoxTitle.Text = view.Name;
-                        textBoxSubject.Text = view.Type;
-                        dateTimePicker1.Value = view.DateCreate;
+                        textBoxFullName.Text = view.Name;
+                        textBoxEmail.Text = view.Email.ToString();
+                        dateTimePicker1.Value = view.Birthday;
+                        textBoxJob.Text = view.Place;
+
                     }
                 }
                 catch (Exception ex)
@@ -60,26 +74,28 @@ namespace View
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxTitle.Text))
+            if (string.IsNullOrEmpty(textBoxFullName.Text))
             {
-                MessageBox.Show("Заполните название", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Введите ФИО", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (string.IsNullOrEmpty(textBoxSubject.Text))
+            if (comboBox1.SelectedValue == null)
             {
                 //nas
-                MessageBox.Show("Заполните вид блюда", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Выберите статью", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                Osnv.CreateOrUpdate(new OsnvBindingModel
+                Author.CreateOrUpdate(new AuthorBindingModel
                 {
                     Id = id,
-                    Name = textBoxTitle.Text,
-                    Type = textBoxSubject.Text,
-                    DateCreate = dateTimePicker1.Value
+                    AuthorName = textBoxFullName.Text,
+                    Email = textBoxEmail.Text,
+                    Place = textBoxJob.Text,
+                    Birthday = dateTimePicker1.Value,
+                    ArticleId = Convert.ToInt32(comboBox1.SelectedValue)
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
@@ -89,6 +105,11 @@ namespace View
             {
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
+        }
+
+        private void buttonSave_Click_1(object sender, EventArgs e)
+        {
+
         }
     }
 }

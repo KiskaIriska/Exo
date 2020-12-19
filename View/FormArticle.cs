@@ -14,49 +14,35 @@ using Unity;
 
 namespace View
 {
-    public partial class FormDop : Form
+    public partial class FormArticle : Form
     {
         [Dependency]
         public new IUnityContainer Container { get; set; }
 
         public int Id { set { id = value; } }
 
-        private readonly IDop Dop;
-
-        private readonly IOsnv Osnv;
+        private readonly IArticle Article;
 
         private int? id;
 
-        public FormDop(IDop service, IOsnv OsnvService)
+        public FormArticle(IArticle Article)
         {
             InitializeComponent();
-            this.Dop = service;
-            this.Osnv = OsnvService;
+            this.Article = Article;
         }
 
-        private void FormDop_Load(object sender, EventArgs e)
+        private void FormArticle_Load(object sender, EventArgs e)
         {
-            var list = Osnv.Read(null);
-            if (list != null)
-            {
-                comboBox1.DataSource = list;
-                comboBox1.DisplayMember = "Name";
-                comboBox1.ValueMember = "Id";
-
-            }
             if (id.HasValue)
             {
                 try
                 {
-
-                    var view = Dop.Read(new DopBindingModel { Id = id })?[0];
+                    var view = Article.Read(new ArticleBindingModel { Id = id })?[0];
                     if (view != null)
                     {
-                        textBoxFullName.Text = view.Name;
-                        textBoxCount.Text = view.Count.ToString();
-                        dateTimePicker1.Value = view.DataCreateDop;
-                        textBoxJob.Text = view.Place;
-
+                        textBoxTitle.Text = view.Name;
+                        textBoxSubject.Text = view.Type;
+                        dateTimePicker1.Value = view.DateCreate;
                     }
                 }
                 catch (Exception ex)
@@ -74,28 +60,26 @@ namespace View
 
         private void buttonSave_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(textBoxFullName.Text))
+            if (string.IsNullOrEmpty(textBoxTitle.Text))
             {
-                MessageBox.Show("Введите название", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Заполните название", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            if (comboBox1.SelectedValue == null)
+            if (string.IsNullOrEmpty(textBoxSubject.Text))
             {
                 //nas
-                MessageBox.Show("Выберите блюдо", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Заполните тематику", "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
 
             try
             {
-                Dop.CreateOrUpdate(new DopBindingModel
+                Article.CreateOrUpdate(new ArticleBindingModel
                 {
                     Id = id,
-                    DopName = textBoxFullName.Text,
-                    Count = Convert.ToInt32(textBoxCount.Text),
-                    Place = textBoxJob.Text,
-                    DataCreateDop = dateTimePicker1.Value,
-                    OsnvId = Convert.ToInt32(comboBox1.SelectedValue)
+                    Name = textBoxTitle.Text,
+                    Type = textBoxSubject.Text,
+                    DateCreate = dateTimePicker1.Value
                 });
                 MessageBox.Show("Сохранение прошло успешно", "Сообщение", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DialogResult = DialogResult.OK;
@@ -106,7 +90,5 @@ namespace View
                 MessageBox.Show(ex.Message, "Ошибка", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-
-       
     }
 }

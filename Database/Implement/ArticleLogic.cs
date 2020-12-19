@@ -9,21 +9,21 @@ using System.Text;
 
 namespace Database.Implement
 {
-    public class OsnvLogic : IOsnv
+    public class ArticleLogic : IArticle
     {
-        public void CreateOrUpdate(OsnvBindingModel model)
+        public void CreateOrUpdate(ArticleBindingModel model)
         {
             using (var context = new Database())
             {
-                Osnv element = context.Osnvs.FirstOrDefault(rec => rec.Name == model.Name && rec.Id != model.Id);
+                Article element = context.Articles.FirstOrDefault(rec => rec.Name == model.Name && rec.Id != model.Id);
                 if (element != null)
                 {
                     //название
-                    throw new Exception("Уже есть блюдо с таким названием");
+                    throw new Exception("Уже есть статья с таким названием");
                 }
                 if (model.Id.HasValue)
                 {
-                    element = context.Osnvs.FirstOrDefault(rec => rec.Id == model.Id);
+                    element = context.Articles.FirstOrDefault(rec => rec.Id == model.Id);
                     if (element == null)
                     {
                         throw new Exception("Элемент не найден");
@@ -31,8 +31,8 @@ namespace Database.Implement
                 }
                 else
                 {
-                    element = new Osnv();
-                    context.Osnvs.Add(element);
+                    element = new Article();
+                    context.Articles.Add(element);
                 }
                 element.Name = model.Name;
                 element.Type = model.Type;
@@ -40,15 +40,15 @@ namespace Database.Implement
                 context.SaveChanges();
             }
         }
-        public void Delete(OsnvBindingModel model)
+        public void Delete(ArticleBindingModel model)
         {
             using (var context = new Database())
             {
-                Osnv element = context.Osnvs.FirstOrDefault(rec => rec.Id ==
+                Article element = context.Articles.FirstOrDefault(rec => rec.Id ==
                model.Id);
                 if (element != null)
                 {
-                    context.Osnvs.Remove(element);
+                    context.Articles.Remove(element);
                     context.SaveChanges();
                 }
                 else
@@ -57,13 +57,13 @@ namespace Database.Implement
                 }
             }
         }
-        public List<OsnvViewModel> Read(OsnvBindingModel model)
+        public List<ArticleViewModel> Read(ArticleBindingModel model)
         {
             using (var context = new Database())
             {
-                return context.Osnvs
+                return context.Articles
                 .Where(rec => model == null || rec.Id == model.Id)
-                .Select(rec => new OsnvViewModel
+                .Select(rec => new ArticleViewModel
                 {
                     Id = rec.Id,
                     Name = rec.Name,

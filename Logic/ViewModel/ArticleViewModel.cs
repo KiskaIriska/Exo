@@ -7,7 +7,7 @@ using System.Text;
 namespace Logic.ViewModel
 {
     [DataContract]
-    public class OsnvViewModel
+    public class ArticleViewModel
     {
         [DataMember]
         public int Id { get; set; }
@@ -17,13 +17,13 @@ namespace Logic.ViewModel
         public string Name { get; set; }
 
         [DataMember]
-        [DisplayName("Тип")]
+        [DisplayName("Тематика")]
         public string Type { get; set; }
 
         [DataMember]
         [DisplayName("Дата создания")]
         public DateTime DateCreate { get; set; }
 
-        public List<DopViewModel> Dops { get; set; }
+        public List<AuthorViewModel> Authors { get; set; }
     }
 }

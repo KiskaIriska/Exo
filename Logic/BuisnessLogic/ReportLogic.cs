@@ -11,28 +11,28 @@ namespace Logic.BuisnessLogic
 {
     public class ReportLogic
     {
-        private readonly IOsnv Osnv;
-        private readonly IDop Dop;
-        public ReportLogic(IOsnv Osnv, IDop Dop)
+        private readonly IArticle Article;
+        private readonly IAuthor Author;
+        public ReportLogic(IArticle Article, IAuthor Author)
         {
-            this.Osnv = Osnv;
-            this.Dop = Dop;
+            this.Article = Article;
+            this.Author = Author;
         }
-        public List<DopViewModel> GetDops(ReportBindingModel model)
+        public List<AuthorViewModel> GetAuthors(ReportBindingModel model)
         {
-            var Dops = Dop.Read(new DopBindingModel
+            var Authors = Author.Read(new AuthorBindingModel
             {
                 DateFrom = model.DateFrom,
                 DateTo = model.DateTo
             });
-            var list = new List<DopViewModel>();
-            foreach (var rec in Dops)
+            var list = new List<AuthorViewModel>();
+            foreach (var rec in Authors)
             {
-                var record = new DopViewModel
+                var record = new AuthorViewModel
                 {
-                    DopName = rec.DopName,
+                    AuthorName = rec.AuthorName,
                     Name = rec.Name,
-                    DataCreateDop = rec.DataCreateDop,
+                    Birthday = rec.Birthday,
                     Place = rec.Place,
                     DateCreate = rec.DateCreate
                 };
@@ -40,10 +40,10 @@ namespace Logic.BuisnessLogic
             }
             return list;
         }
-        public async void SaveDopsToPdfFile(ReportBindingModel model)
+        public async void SaveAuthorsToPdfFile(ReportBindingModel model)
         {
             //названия
-            string title = "Блюда и их продукты";
+            string title = "Статья и ее авторы";
 
             await Task.Run(() =>
             {
@@ -51,7 +51,7 @@ namespace Logic.BuisnessLogic
                 {
                     FileName = model.FileName,
                     Title = title,
-                    Dops = GetDops(model),
+                    Authors = GetAuthors(model),
                 });
             });
         }

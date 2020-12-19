@@ -6,7 +6,7 @@ using System.Text;
 namespace Logic.BindingModel
 {
     [DataContract]
-    public class OsnvBindingModel
+    public class ArticleBindingModel
     {
         public int? Id { get; set; }
 
@@ -16,6 +16,6 @@ namespace Logic.BindingModel
 
         public DateTime DateCreate { get; set; }
 
-        public List<DopBindingModel> Dops { get; set; }
+        public List<AuthorBindingModel> Authors { get; set; }
     }
 }

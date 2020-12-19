@@ -22,13 +22,13 @@ namespace View
             var container = BuildUnityContainer();
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(container.Resolve<FormOsnvs>());
+            Application.Run(container.Resolve<FormArticles>());
         }
         public static IUnityContainer BuildUnityContainer()
         {
             var currentContainer = new UnityContainer();
-            currentContainer.RegisterType<IDop, DopLogic>(new HierarchicalLifetimeManager());
-            currentContainer.RegisterType<IOsnv, OsnvLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IAuthor, AuthorLogic>(new HierarchicalLifetimeManager());
+            currentContainer.RegisterType<IArticle, ArticleLogic>(new HierarchicalLifetimeManager());
             return currentContainer;
         }
     }
